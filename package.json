@@ -1,0 +1,67 @@
+{
+  "name": "@geekjuice/verse",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "geekjuice/verse",
+  "author": {
+    "name": "Nicholas Hwang",
+    "email": "nick.joosung.hwang@gmail.com",
+    "url": "http://nicholash.wang"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "bin": "lib/cli.js",
+  "files": [
+    "lib"
+  ],
+  "dependencies": {
+    "chalk": "2.0.0",
+    "debug": "2.6.8",
+    "dotenv": "4.0.0",
+    "immutable": "3.8.1",
+    "inquirer": "3.1.1",
+    "keytar": "4.0.3",
+    "minimist": "1.2.0",
+    "nightmare": "2.10.0",
+    "ora": "1.3.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "7.2.3",
+    "eslint": "4.1.1",
+    "eslint-config-prettier": "2.2.0",
+    "husky": "0.14.1",
+    "lint-staged": "4.0.0",
+    "prettier": "1.5.2"
+  },
+  "scripts": {
+    "eslint": "eslint",
+    "eslint:run": "npm run eslint -- lib",
+    "prettier": "prettier --write --single-quote",
+    "prettier:run": "npm run prettier -- lib",
+    "precommit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run prettier",
+      "npm run eslint",
+      "git add"
+    ]
+  },
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "env": {
+      "browser": true,
+      "es6": true,
+      "node": true
+    },
+    "extends": [
+      "eslint:recommended",
+      "prettier"
+    ],
+    "rules": {
+      "no-console": "off"
+    }
+  }
+}
