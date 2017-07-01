@@ -4,9 +4,9 @@
 
 require('dotenv').config();
 
-const minimist = require('minimist');
-const { cyan, gray, magenta } = require('chalk');
-const token = require('./token');
+import { cyan, gray, magenta } from 'chalk';
+import * as minimist from 'minimist';
+import * as token from './token';
 
 const { argv: [, , ...args] } = process;
 
@@ -23,7 +23,7 @@ const description = `
     $ ${cyan('verse')} ${magenta('"Humble - Kendrick Lamar"')}
 `;
 
-const info = () => {
+const info = (): void => {
   console.log(description);
   process.exit(0);
 };
@@ -35,7 +35,8 @@ if (h === true || help === true) {
 if (clear === true) {
   token.clear();
 } else if (_.length) {
-  require('./index.js').run(_.join(' '));
+  const inputs = _.join(' ');
+  require('./main.js').run(inputs);
 } else {
   info();
 }
