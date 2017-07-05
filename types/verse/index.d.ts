@@ -1,4 +1,4 @@
-// Type definitions for verse 1.0.0
+// Type definitions for verse 1.1.0
 // Project: https://github.com/geekjuice/verse
 // Definitions by: Nicholas Hwang <http://nicholash.wang>
 
