@@ -1,6 +1,6 @@
 {
   "name": "@geekjuice/verse",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "main": "index.js",
   "description": "CLI for Genius lyrics",
   "repository": "geekjuice/verse",
