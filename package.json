@@ -1,7 +1,6 @@
 {
   "name": "@geekjuice/verse",
-  "version": "1.1.0",
-  "main": "index.js",
+  "version": "1.2.0",
   "description": "CLI for Genius lyrics",
   "repository": "geekjuice/verse",
   "author": {
@@ -13,58 +12,63 @@
   "engines": {
     "node": ">=8.0.0"
   },
-  "bin": "./dist/cli.js",
+  "bin": "./lib/cli.js",
   "files": [
-    "dist/**/*.js"
+    "lib/**/*.js"
   ],
+  "config": {
+    "source": "src",
+    "destination": "lib"
+  },
   "dependencies": {
+    "axios": "0.16.2",
     "chalk": "2.0.1",
     "debug": "2.6.8",
     "dotenv": "4.0.0",
-    "immutable": "3.8.1",
-    "inquirer": "3.1.1",
+    "inquirer": "3.2.0",
     "keytar": "4.0.3",
     "minimist": "1.2.0",
     "nightmare": "2.10.0",
     "ora": "1.3.0"
   },
   "devDependencies": {
-    "@types/chalk": "0.4.31",
-    "@types/debug": "0.0.29",
-    "@types/inquirer": "0.0.35",
-    "@types/keytar": "4.0.0",
-    "@types/minimist": "1.2.0",
-    "@types/node": "8.0.7",
-    "@types/request": "0.0.45",
     "babel-eslint": "7.2.3",
-    "eslint": "4.1.1",
+    "eslint": "4.2.0",
     "eslint-config-prettier": "2.3.0",
-    "husky": "0.14.2",
-    "lint-staged": "4.0.0",
-    "prettier": "1.5.2",
-    "typescript": "2.4.1",
-    "typescript-eslint-parser": "3.0.0"
+    "eslint-plugin-flowtype": "2.35.0",
+    "flow-bin": "0.50.0",
+    "flow-remove-types": "1.2.1",
+    "flow-typed": "2.1.5",
+    "husky": "0.14.3",
+    "lint-staged": "4.0.2",
+    "prettier": "1.5.3"
   },
   "scripts": {
-    "tsc": "tsc",
+    "flow": "flow",
+    "flow:stop": "npm run flow -- stop",
+    "flow-typed": "flow-typed",
+    "flow-typed:run": "npm run flow-typed -- update",
+    "build": "flow-remove-types -a -p -d $npm_package_config_destination",
+    "build:run": "npm run build -- $npm_package_config_source",
+    "build:stage": "git add $npm_package_config_destination",
     "eslint": "eslint",
-    "eslint:run": "npm run eslint -- lib",
+    "eslint:run": "npm run eslint -- $npm_package_config_source",
     "prettier": "prettier --write --single-quote",
-    "prettier:run": "npm run prettier -- lib",
-    "precommit": "lint-staged"
+    "prettier:run": "npm run prettier -- $npm_package_config_source/**/*.js",
+    "postinstall": "npm run flow-typed:run",
+    "precommit": "npm run build:run && npm run build:stage && lint-staged",
+    "start": "npm run build:run && node ./lib/cli.js",
+    "inspect": "npm run build:run && node --inspect-brk ./lib/cli.js"
   },
   "lint-staged": {
-    "*.ts": [
+    "src/**/*.js": [
       "npm run prettier",
       "npm run eslint",
       "git add"
     ]
   },
   "eslintConfig": {
-    "parser": "typescript-eslint-parser",
-    "parserOptions": {
-      "sourceType": "module"
-    },
+    "parser": "babel-eslint",
     "env": {
       "browser": true,
       "es6": true,
@@ -72,7 +76,11 @@
     },
     "extends": [
       "eslint:recommended",
+      "plugin:flowtype/recommended",
       "prettier"
+    ],
+    "plugins": [
+      "flowtype"
     ],
     "rules": {
       "no-console": "off"
