@@ -55,7 +55,6 @@
     "eslint:run": "npm run eslint -- $npm_package_config_source",
     "prettier": "prettier --write --single-quote",
     "prettier:run": "npm run prettier -- $npm_package_config_source/**/*.js",
-    "postinstall": "npm run flow-typed:run",
     "precommit": "npm run build:run && npm run build:stage && lint-staged",
     "start": "npm run build:run && node ./lib/cli.js",
     "inspect": "npm run build:run && node --inspect-brk ./lib/cli.js"
