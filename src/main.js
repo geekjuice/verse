@@ -44,10 +44,11 @@ const format = (lyrics: string = ''): string =>
   lyrics.trim().replace(/\[.*\]/g, match => magenta(match));
 
 module.exports.run = async (query: string): Promise<void> => {
-  const spinner = progress().start();
+  const spinner = progress();
   try {
     DEBUG('getting genius api client token');
     const token = await getAuthToken();
+    spinner.start();
 
     DEBUG(`searching '${query}'`);
     spinner.text = `Searching for '${cyan(query)}' using the Genius API...`;
@@ -68,5 +69,7 @@ module.exports.run = async (query: string): Promise<void> => {
     DEBUG(`error ${exception}`);
     spinner.fail(red('Something went wrong... (╯°□°）╯︵ ┻━┻'));
     process.exit(1);
+  } finally {
+    spinner.stop();
   }
 };
