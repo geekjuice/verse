@@ -1,88 +1,51 @@
 {
   "name": "@geekjuice/verse",
   "version": "1.2.2",
-  "description": "CLI for Genius lyrics",
+  "description": "cli for genius lyrics",
   "repository": "geekjuice/verse",
   "author": {
-    "name": "Nicholas Hwang",
-    "email": "nick.joosung.hwang@gmail.com",
-    "url": "http://nicholash.wang"
+    "name": "nicholas hwang",
+    "email": "hello@undefined.engineer",
+    "url": "https://undefined.engineer"
   },
   "license": "MIT",
   "engines": {
     "node": ">=8.0.0"
   },
-  "bin": "./lib/cli.js",
+  "bin": "index.js",
   "files": [
     "lib/**/*.js"
   ],
-  "config": {
-    "source": "src",
-    "destination": "lib"
-  },
   "dependencies": {
-    "axios": "0.16.2",
-    "chalk": "2.0.1",
-    "debug": "2.6.8",
-    "dotenv": "4.0.0",
-    "inquirer": "3.2.0",
-    "keytar": "4.0.3",
-    "minimist": "1.2.0",
-    "nightmare": "2.10.0",
-    "ora": "1.3.0"
+    "axios": "^0.19.0",
+    "chalk": "^2.4.2",
+    "cheerio": "^1.0.0-rc.3",
+    "debug": "^4.1.1",
+    "dotenv": "^8.1.0",
+    "meow": "^5.0.0",
+    "ora": "^3.4.0",
+    "prompts": "^2.2.1"
   },
   "devDependencies": {
-    "babel-eslint": "7.2.3",
-    "eslint": "4.2.0",
-    "eslint-config-prettier": "2.3.0",
-    "eslint-plugin-flowtype": "2.35.0",
-    "flow-bin": "0.50.0",
-    "flow-remove-types": "1.2.1",
-    "flow-typed": "2.1.5",
-    "husky": "0.14.3",
-    "lint-staged": "4.0.2",
-    "prettier": "1.5.3"
+    "@types/axios": "^0.14.0",
+    "@types/cheerio": "^0.22.13",
+    "@types/debug": "^4.1.5",
+    "@types/prompts": "^2.0.1",
+    "@typescript-eslint/eslint-plugin": "^2.2.0",
+    "@typescript-eslint/parser": "^2.2.0",
+    "babel-eslint": "^10.0.3",
+    "eslint": "^6.4.0",
+    "eslint-config-prettier": "^6.3.0",
+    "husky": "^3.0.5",
+    "jest": "^24.9.0",
+    "lint-staged": "^9.2.5",
+    "prettier": "^1.18.2",
+    "typescript": "^3.6.3"
   },
   "scripts": {
-    "flow": "flow",
-    "flow:stop": "npm run flow -- stop",
-    "flow-typed": "flow-typed",
-    "flow-typed:run": "npm run flow-typed -- update",
-    "build": "flow-remove-types -a -p -d $npm_package_config_destination",
-    "build:run": "npm run build -- $npm_package_config_source",
-    "build:stage": "git add $npm_package_config_destination",
     "eslint": "eslint",
-    "eslint:run": "npm run eslint -- $npm_package_config_source",
-    "prettier": "prettier --write --single-quote",
-    "prettier:run": "npm run prettier -- $npm_package_config_source/**/*.js",
-    "precommit": "npm run build:run && npm run build:stage && lint-staged",
-    "start": "npm run build:run && node ./lib/cli.js",
-    "inspect": "npm run build:run && node --inspect-brk ./lib/cli.js"
-  },
-  "lint-staged": {
-    "src/**/*.js": [
-      "npm run prettier",
-      "npm run eslint",
-      "git add"
-    ]
-  },
-  "eslintConfig": {
-    "parser": "babel-eslint",
-    "env": {
-      "browser": true,
-      "es6": true,
-      "node": true
-    },
-    "extends": [
-      "eslint:recommended",
-      "plugin:flowtype/recommended",
-      "prettier"
-    ],
-    "plugins": [
-      "flowtype"
-    ],
-    "rules": {
-      "no-console": "off"
-    }
+    "jest": "jest",
+    "prettier": "prettier",
+    "tsc": "tsc"
   }
 }
