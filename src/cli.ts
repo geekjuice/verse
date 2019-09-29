@@ -4,7 +4,6 @@ import { reset, ensure } from './auth';
 import { MESSAGE } from './exception';
 import { create } from './logger';
 import { request } from './main';
-import M = require('minimatch');
 
 const { blue, cyan, gray, magenta, red } = chalk;
 
