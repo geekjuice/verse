@@ -5,7 +5,6 @@
 ## install
 
 ```
-// npm
 ❯ npm install --global @geekjuice/verse
 ```
 
