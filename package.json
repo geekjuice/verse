@@ -12,9 +12,19 @@
   "engines": {
     "node": ">=8.0.0"
   },
-  "bin": "index.js",
+  "bin": {
+    "verse": "index.js"
+  },
   "files": [
     "lib/**/*.js"
+  ],
+  "keywords": [
+    "geekjuice",
+    "cli",
+    "genius",
+    "lyrics",
+    "music",
+    "reference"
   ],
   "dependencies": {
     "@geekjuice/cash": "0.0.1",
