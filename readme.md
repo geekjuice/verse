@@ -20,6 +20,7 @@
   options:
     -f, --filepath  path to configuration      [~/.verse]
     -s, --select    select from query results
+    -p, --player    use current song on player
     -c, --clear     clear genius api token
     -v, --version   show version
     -h, --help      show help
@@ -32,15 +33,15 @@
 ❯ verse "humble - kendrick lamar"
 
 
-HUMBLE. by Kendrick Lamar
+  HUMBLE. by Kendrick Lamar
 
 
-[Intro]
-Nobody pray for me
-It's been that day for me
-Waaaaay (Yeah, yeah!)
+  [Intro]
+  Nobody pray for me
+  It's been that day for me
+  Waaaaay (Yeah, yeah!)
 
-...
+  ...
 
 ```
 
