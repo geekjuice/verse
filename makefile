@@ -14,7 +14,9 @@ DONE = echo [verse] ✓ $@ done
 	lint \
 	format \
 	test \
-	start
+	dev \
+	start \
+	build \
 
 default:
 	echo "Please enter a command..."
@@ -57,12 +59,4 @@ build: clean
 
 start:
 	node $(INDEX)
-	$(DONE)
-
-next: build
-	npm publish --tag=next
-	$(DONE)
-
-latest: build
-	npm publish --tag=latest
 	$(DONE)
