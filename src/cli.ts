@@ -1,6 +1,7 @@
 import chalk from 'chalk';
 import meow from 'meow';
 import { reset, ensure } from './auth';
+import { current } from './playing';
 import { MESSAGE } from './exception';
 import { create } from './logger';
 import { request } from './main';
@@ -9,13 +10,15 @@ const { blue, cyan, gray, magenta, red } = chalk;
 
 const logger = create('index');
 
+const pad = (message: string): string => `\n  ${message}`;
+
 (async (): Promise<void> => {
   try {
     logger.log('starting verse');
 
     const {
       input,
-      flags: { select, filepath, clear, help, version },
+      flags: { select, filepath, player, clear, help, version },
       showHelp,
       showVersion,
     } = meow(
@@ -26,6 +29,7 @@ const logger = create('index');
     options:
       ${blue('-f, --filepath')}  path to configuration      ${gray('[~/.verse]')}
       ${blue('-s, --select')}    select from query results
+      ${blue('-p, --player')}    use current song on player
       ${blue('-c, --clear')}     clear genius api token
       ${blue('-v, --version')}   show version
       ${blue('-h, --help')}      show help`,
@@ -33,12 +37,16 @@ const logger = create('index');
         autoHelp: false,
         autoVersion: false,
         flags: {
+          filepath: {
+            alias: 'f',
+            type: 'string',
+          },
           select: {
             alias: 's',
             type: 'boolean',
           },
-          filepath: {
-            alias: 'f',
+          player: {
+            alias: 'p',
             type: 'string',
           },
           clear: {
@@ -72,13 +80,21 @@ const logger = create('index');
       process.exit(0);
     }
 
-    if (input.length === 0) {
-      logger.warn(`no query provided`);
+    if (input.length === 0 && !player) {
+      logger.warn('no query or player provided');
       showHelp();
     }
 
     const token = await ensure(filepath);
-    const query = input.join(' ');
+    const query = player ? await current(player) : input.join(' ');
+
+    if (player && !query) {
+      const message = `no song currently playing on ${player}`;
+      logger.warn(message);
+      console.log(red(pad(message)));
+      showHelp();
+    }
+
     await request({ token, select, query });
 
     logger.log('exiting verse');
